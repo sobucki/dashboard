@@ -13,6 +13,7 @@ function ItemColumn({
   return (
     <Container
       className={item.selected && !blurOnSelect ? 'selected' : ''}
+      urlImage={item.url}
       onClick={() => onClickEvent(item.id)}
     ></Container>
   );

@@ -36,6 +36,14 @@ function ItemSelectorColumn({
     );
   }, [destinyData, sourceData]);
 
+  const addAll = () => {
+    setDestinyData(originData.map((item) => ({ ...item, selected: true })));
+  };
+
+  const removeAll = () => {
+    setDestinyData([]);
+  };
+
   return (
     <Container>
       <ColumnSelector
@@ -46,16 +54,14 @@ function ItemSelectorColumn({
         data={originData}
       />
       <ButtonsArea>
-        <button>Add</button>
-        <button>Add</button>
+        <button onClick={addAll}>Add all</button>
+        <button onClick={removeAll}>Remove all</button>
         <button>Add</button>
       </ButtonsArea>
       <ColumnSelector
-        onChange={(items) => {
-          console.log(items);
-          setDestinyData(items.filter((item) => item.selected));
-          // setOriginData(destinyData.fi)
-        }}
+        onChange={(items) =>
+          setDestinyData(items.filter((item) => item.selected))
+        }
         isDestinyColumn
         data={destinyData}
       />

@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-import Image1 from '../../../../assets/4244df55c1fe.jpg';
 
-export const Container = styled.div`
-  background-image: url(${Image1});
+interface ContainerProps {
+  urlImage: string;
+}
+
+export const Container = styled.div<ContainerProps>`
+  background-image: url(${({ urlImage }) => urlImage});
   background-position: center;
   background-size: cover;
 
