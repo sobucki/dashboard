@@ -38,7 +38,13 @@ function Home() {
     },
   ]);
 
-  return <ItemSelectorColumn sourceData={memes} selectedData={selected} />;
+  return (
+    <ItemSelectorColumn
+      sourceData={memes}
+      selectedData={selected}
+      onSave={(items) => console.log(items)}
+    />
+  );
 }
 
 export default Home;

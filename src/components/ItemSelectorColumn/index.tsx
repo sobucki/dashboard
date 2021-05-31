@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 import ColumnSelector from './section/ColumnSelector';
-import { Container, ButtonsArea } from './styles';
 import { Item } from './types';
+import { Container, ButtonsArea, DestinyWrap, SaveButton } from './styles';
 
 export interface ItemSelectorColumnProps {
   sourceData: Item[];
   selectedData: Item[];
+  onSave: (items: Item[]) => void;
 }
 
 function ItemSelectorColumn({
   sourceData,
   selectedData,
+  onSave,
 }: ItemSelectorColumnProps) {
   const [originData, setOriginData] = useState<Item[]>([]);
   const [destinyData, setDestinyData] = useState<Item[]>([]);
@@ -56,15 +58,19 @@ function ItemSelectorColumn({
       <ButtonsArea>
         <button onClick={addAll}>Add all</button>
         <button onClick={removeAll}>Remove all</button>
-        <button>Add</button>
       </ButtonsArea>
-      <ColumnSelector
-        onChange={(items) =>
-          setDestinyData(items.filter((item) => item.selected))
-        }
-        isDestinyColumn
-        data={destinyData}
-      />
+      <DestinyWrap>
+        <ColumnSelector
+          onChange={(items) =>
+            setDestinyData(items.filter((item) => item.selected))
+          }
+          isDestinyColumn
+          data={destinyData}
+        />
+        <SaveButton type="button" onClick={() => onSave(destinyData)}>
+          Save
+        </SaveButton>
+      </DestinyWrap>
     </Container>
   );
 }

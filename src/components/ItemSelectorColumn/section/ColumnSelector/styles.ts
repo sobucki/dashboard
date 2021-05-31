@@ -7,4 +7,5 @@ export const Container = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   grid-auto-rows: 100px;
+  height: 100%;
 `;

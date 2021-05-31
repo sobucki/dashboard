@@ -18,5 +18,25 @@ export const ButtonsArea = styled.div`
     margin-bottom: 8px;
     margin-left: 8px;
     margin-right: 8px;
+    height: 24px;
+    border-radius: 4px;
   }
+`;
+
+export const DestinyWrap = styled.div`
+  display: block;
+  height: calc(100% - 44px);
+`;
+
+export const SaveButton = styled.button`
+  height: 32px;
+  width: 100%;
+  /* padding: 8px; */
+  border-radius: 4px;
+  margin-top: 8px;
+  background-color: var(--discord);
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--white);
+  /* line-height: 20px; */
 `;
