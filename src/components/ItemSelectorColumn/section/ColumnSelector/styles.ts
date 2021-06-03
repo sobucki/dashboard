@@ -12,3 +12,19 @@ export const Container = styled.div`
 
   height: calc(100% - 40px);
 `;
+
+interface ImageContainerProps {
+  urlImage: string;
+}
+
+export const ImageContainer = styled.div<ImageContainerProps>`
+  background-image: url(${({ urlImage }) => urlImage});
+  background-position: center;
+  background-size: cover;
+
+  :hover {
+    filter: brightness(120%);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+`;

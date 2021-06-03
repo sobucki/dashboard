@@ -6,53 +6,59 @@ import { Container, ButtonsArea, DestinyWrap, SaveButton } from './styles';
 export interface ItemSelectorColumnProps {
   sourceData: Item[];
   selectedData: Item[];
-  onSave: (items: Item[]) => void;
+  onChange: (items: Item[]) => void;
 }
 
 function ItemSelectorColumn({
   sourceData,
   selectedData,
-  onSave,
+  onChange,
 }: ItemSelectorColumnProps) {
   const [originData, setOriginData] = useState<Item[]>([]);
   const [destinyData, setDestinyData] = useState<Item[]>([]);
 
   useEffect(() => {
     setOriginData(
-      sourceData.map((item) =>
-        selectedData.find((selectedItem) => selectedItem.id === item.id)
-          ? { ...item, selected: true }
-          : { ...item, selected: false }
+      sourceData.filter((item) =>
+        selectedData.find((selectedItem) => selectedItem.id !== item.id)
       )
     );
-    setDestinyData(selectedData.map((item) => ({ ...item, selected: true })));
+    setDestinyData(
+      sourceData.filter((item) =>
+        selectedData.find((selectedItem) => selectedItem.id === item.id)
+      )
+    );
   }, [sourceData, selectedData]);
 
-  useEffect(() => {
-    setOriginData(
-      sourceData.map((item) =>
-        destinyData.find((selectedItem) => selectedItem.id === item.id)
-          ? { ...item, selected: true }
-          : { ...item, selected: false }
-      )
-    );
-  }, [destinyData, sourceData]);
-
   const addAll = () => {
-    setDestinyData(originData.map((item) => ({ ...item, selected: true })));
+    onChange([...destinyData, ...originData]);
+    setDestinyData([...destinyData, ...originData]);
+    setOriginData([]);
   };
 
   const removeAll = () => {
+    onChange([]);
+    setOriginData([...originData, ...destinyData]);
     setDestinyData([]);
+  };
+
+  const moveToDestiny = (item: Item) => {
+    onChange([...destinyData, item]);
+
+    setDestinyData([...destinyData, item]);
+    setOriginData(originData.filter((data) => data.id !== item.id));
+  };
+  const moveToOrigin = (item: Item) => {
+    onChange(destinyData.filter((data) => data.id !== item.id));
+
+    setOriginData([...originData, item]);
+    setDestinyData(destinyData.filter((data) => data.id !== item.id));
   };
 
   return (
     <Container>
       <ColumnSelector
-        onChange={(items) => {
-          setDestinyData(items.filter((item) => item.selected));
-          setOriginData(items);
-        }}
+        onChange={(item) => moveToDestiny(item)}
         data={originData}
       />
       <ButtonsArea>
@@ -60,16 +66,10 @@ function ItemSelectorColumn({
         <button onClick={removeAll}>Remove all</button>
       </ButtonsArea>
       <DestinyWrap>
-        <ColumnSelector 
-          onChange={(items) =>
-            setDestinyData(items.filter((item) => item.selected))
-          }
-          isDestinyColumn
+        <ColumnSelector
+          onChange={(item) => moveToOrigin(item)}
           data={destinyData}
         />
-        <SaveButton type="button" onClick={() => onSave(destinyData)}>
-          Save
-        </SaveButton>
       </DestinyWrap>
     </Container>
   );
