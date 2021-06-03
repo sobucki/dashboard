@@ -25,7 +25,8 @@ export const ButtonsArea = styled.div`
 
 export const DestinyWrap = styled.div`
   display: block;
-  height: calc(100% - 44px);
+  height: calc(100%);
+  overflow-y: hidden;
 `;
 
 export const SaveButton = styled.button`

@@ -60,7 +60,7 @@ function ItemSelectorColumn({
         <button onClick={removeAll}>Remove all</button>
       </ButtonsArea>
       <DestinyWrap>
-        <ColumnSelector
+        <ColumnSelector 
           onChange={(items) =>
             setDestinyData(items.filter((item) => item.selected))
           }

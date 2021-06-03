@@ -1,8 +1,8 @@
 import { Container } from './styles';
 
 export interface ItemColumnProps {
-  item: { id: number; url: string; selected: boolean };
-  onClick: (id: number) => void;
+  item: { id: number | string; url: string; selected: boolean };
+  onClick: (id: number | string) => void;
   blurOnSelect?: boolean;
 }
 function ItemColumn({

@@ -15,4 +15,5 @@ export const ContentArea = styled.div`
   /* display: flex; */
   background-color: var(--primary);
   padding: 32px 24px;
+  max-height: 100vh;
 `;
