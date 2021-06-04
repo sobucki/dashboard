@@ -3,6 +3,12 @@ import ItemSelectorColumn from '../../components/ItemSelectorColumn';
 import { Item } from '../../components/ItemSelectorColumn/types';
 import { api } from '../../services/api';
 import { Meme } from '../../services/types';
+import {
+  BottomContainer,
+  Container,
+  WrapCollectionController,
+  Button,
+} from './styles';
 
 function Home() {
   const [memes, setMemes] = useState<Item[]>([]);
@@ -29,11 +35,20 @@ function Home() {
   }, []);
 
   return (
-    <ItemSelectorColumn
-      sourceData={memes}
-      selectedData={selected}
-      onChange={(items) => console.log(items)}
-    />
+    <Container>
+      <ItemSelectorColumn
+        sourceData={memes}
+        selectedData={selected}
+        onChange={(items) => console.log(items)}
+      />
+      <BottomContainer>
+        <WrapCollectionController>
+          <Button>Previous</Button>
+          <Button>Next</Button>
+        </WrapCollectionController>
+        <Button style={{ flex: 1 }}>Save</Button>
+      </BottomContainer>
+    </Container>
   );
 }
 

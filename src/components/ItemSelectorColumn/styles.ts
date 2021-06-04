@@ -5,6 +5,8 @@ export const Container = styled.div`
   grid-template-columns: auto 150px auto;
   grid-template-areas: '. BT .';
   height: 100%;
+  min-height: 0;
+  min-width: 0;
 `;
 
 export const ButtonsArea = styled.div`
@@ -27,17 +29,4 @@ export const DestinyWrap = styled.div`
   display: block;
   height: calc(100%);
   overflow-y: hidden;
-`;
-
-export const SaveButton = styled.button`
-  height: 32px;
-  width: 100%;
-  /* padding: 8px; */
-  border-radius: 4px;
-  margin-top: 8px;
-  background-color: var(--discord);
-  font-size: 14px;
-  font-weight: bold;
-  color: var(--white);
-  /* line-height: 20px; */
 `;

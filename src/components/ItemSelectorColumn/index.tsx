@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ColumnSelector from './section/ColumnSelector';
 import { Item } from './types';
-import { Container, ButtonsArea, DestinyWrap, SaveButton } from './styles';
+import { Container, ButtonsArea, DestinyWrap } from './styles';
 
 export interface ItemSelectorColumnProps {
   sourceData: Item[];
@@ -65,12 +65,10 @@ function ItemSelectorColumn({
         <button onClick={addAll}>Add all</button>
         <button onClick={removeAll}>Remove all</button>
       </ButtonsArea>
-      <DestinyWrap>
-        <ColumnSelector
-          onChange={(item) => moveToOrigin(item)}
-          data={destinyData}
-        />
-      </DestinyWrap>
+      <ColumnSelector
+        onChange={(item) => moveToOrigin(item)}
+        data={destinyData}
+      />
     </Container>
   );
 }

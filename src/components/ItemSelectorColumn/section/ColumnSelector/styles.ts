@@ -10,7 +10,7 @@ export const Container = styled.div`
   /* height: 100%; */
   overflow-y: scroll;
 
-  height: calc(100% - 40px);
+  height: 100%;
 `;
 
 interface ImageContainerProps {
