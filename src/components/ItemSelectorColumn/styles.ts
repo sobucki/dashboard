@@ -7,6 +7,7 @@ export const Container = styled.div`
   height: 100%;
   min-height: 0;
   min-width: 0;
+  width: 100%;
 `;
 
 export const ButtonsArea = styled.div`
