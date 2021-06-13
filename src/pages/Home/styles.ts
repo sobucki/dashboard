@@ -4,20 +4,28 @@ export const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const BottomContainer = styled.div`
-  height: 40px;
+  height: 120px;
   width: 100%;
   display: flex;
   flex-direction: row;
   max-width: 760px;
+  margin: 16px 0px;
+  justify-content: center;
+  align-items: flex-end;
 `;
 
 export const WrapCollectionController = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
+
+  button {
+    margin-left: 16px;
+  }
 `;
 
 export const Button = styled.div`

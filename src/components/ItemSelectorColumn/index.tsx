@@ -15,20 +15,16 @@ function ItemSelectorColumn({
   onChange,
 }: ItemSelectorColumnProps) {
   const [originData, setOriginData] = useState<Item[]>([]);
-  const [destinyData, setDestinyData] = useState<Item[]>([]);
+  const [destinyData, setDestinyData] = useState<Item[]>([...selectedData]);
 
   useEffect(() => {
     setOriginData(
-      sourceData.filter((item) =>
-        selectedData.find((selectedItem) => selectedItem.id !== item.id)
+      sourceData.filter(
+        (item) =>
+          !destinyData.find((selectedItem) => item.id === selectedItem.id)
       )
     );
-    setDestinyData(
-      sourceData.filter((item) =>
-        selectedData.find((selectedItem) => selectedItem.id === item.id)
-      )
-    );
-  }, [sourceData, selectedData]);
+  }, [sourceData, destinyData]);
 
   const addAll = () => {
     onChange([...destinyData, ...originData]);

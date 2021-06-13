@@ -1,52 +1,108 @@
+import { Box, Button, Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
+import CategoryCard from '../../components/CategoryCard';
 import ItemSelectorColumn from '../../components/ItemSelectorColumn';
 import { Item } from '../../components/ItemSelectorColumn/types';
+import LoadingContainer from '../../components/LoadingContainer';
 import { api } from '../../services/api';
-import { Meme } from '../../services/types';
-import {
-  BottomContainer,
-  Container,
-  WrapCollectionController,
-  Button,
-} from './styles';
+import { Meme, Pagination, Post } from '../../services/types';
+import { BottomContainer, Container, WrapCollectionController } from './styles';
 
 function Home() {
   const [memes, setMemes] = useState<Item[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [selectedPost, setSelectedPost] = useState<Post>();
+  const [loading, setLoading] = useState(false);
+  const [index, setIndex] = useState(0);
 
-  const [selected] = useState([
-    {
-      id: 5,
-      url: 'https://www.ahnegao.com.br/wp-content/uploads/2021/05/sabadaco-meme-5.jpg',
-    },
-  ]);
+  const [selected, setSelected] = useState<Item[]>([]);
 
-  async function loadMemes(): Promise<void> {
-    const response = await api.get<Meme[]>('memes');
-    setMemes(
-      response.data.map<Item>((item) => ({
-        id: item.id,
-        url: item.link,
-      }))
-    );
+  async function loadMemes(id: string): Promise<void> {
+    try {
+      setLoading(true);
+      const response = await api.get<Post>(`post/${id}`);
+      if (response.data.memes) {
+        setMemes(
+          response.data.memes?.map<Item>((item) => ({
+            id: item.id,
+            url: item.link,
+          }))
+        );
+      }
+    } catch (error) {
+      console.log('error', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function loadPosts(): Promise<void> {
+    try {
+      setLoading(true);
+      const response = await api.get<Post[]>('post');
+      setPosts(response.data);
+    } catch (error) {
+      console.log('error', error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
-    loadMemes();
+    loadPosts();
   }, []);
+
+  useEffect(() => {
+    if (selectedPost) {
+      loadMemes(selectedPost.id);
+    }
+  }, [selectedPost]);
+
+  useEffect(() => {
+    if (posts && posts.length > index) setSelectedPost(posts[index]);
+  }, [index, posts]);
+
+  if (loading) return <LoadingContainer />;
 
   return (
     <Container>
       <ItemSelectorColumn
         sourceData={memes}
         selectedData={selected}
-        onChange={(items) => console.log(items)}
+        onChange={(items) => setSelected(items)}
       />
       <BottomContainer>
-        <WrapCollectionController>
-          <Button>Previous</Button>
-          <Button>Next</Button>
-        </WrapCollectionController>
-        <Button style={{ flex: 1 }}>Save</Button>
+        <Box flexDirection="column" display="flex" flex="1" alignItems="center">
+          <Typography variant="h6">
+            Coleção{' '}
+            {selectedPost && new Date(selectedPost?.date).toDateString()}
+          </Typography>
+          <WrapCollectionController>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setIndex(index - 1)}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setIndex(index + 1)}
+            >
+              Next
+            </Button>
+          </WrapCollectionController>
+        </Box>
+        <Box flexDirection="column" display="flex" flex="1">
+          <CategoryCard />
+          <WrapCollectionController>
+            <Button variant="contained">Cancel</Button>
+            <Button variant="contained" color="primary">
+              Save
+            </Button>
+          </WrapCollectionController>
+        </Box>
       </BottomContainer>
     </Container>
   );
