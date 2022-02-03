@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router';
 import About from '../pages/About';
+import Category from '../pages/Category';
 import Home from '../pages/Home';
 import User from '../pages/User';
 
@@ -11,6 +12,9 @@ function Routes() {
       </Route>
       <Route path="/users">
         <User />
+      </Route>
+      <Route path="/category">
+        <Category />
       </Route>
       <Route path="/">
         <Home />

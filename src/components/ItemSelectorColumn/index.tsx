@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ColumnSelector from './section/ColumnSelector';
 import { Item } from './types';
-import { Container, ButtonsArea, DestinyWrap } from './styles';
+import { Container, ButtonsArea } from './styles';
 
 export interface ItemSelectorColumnProps {
   sourceData: Item[];

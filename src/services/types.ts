@@ -1,9 +1,9 @@
 export interface Meme {
   id: string;
   link: string;
-  post_id: string;
-  created_at: Date;
-  updated_at: Date;
+  postId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface Pagination<T> {
@@ -15,5 +15,13 @@ export interface Post {
   id: string;
   link: string;
   date: Date;
-  memes?: Meme[];
+  Meme?: Meme[];
+}
+
+export interface Category {
+  id: string;
+  link: string;
+  description: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

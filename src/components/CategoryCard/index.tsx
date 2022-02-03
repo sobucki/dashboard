@@ -1,18 +1,8 @@
-import React from 'react';
-import {
-  Theme,
-  createStyles,
-  makeStyles,
-  useTheme,
-} from '@material-ui/core/styles';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function CategoryCard() {
   const classes = useStyles();
-  const theme = useTheme();
   return (
     <Card className={classes.root}>
       <div className={classes.details}>

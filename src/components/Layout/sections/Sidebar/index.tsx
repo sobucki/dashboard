@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import { Link, LinkProps } from 'react-router-dom';
 import CategoryIcon from '@material-ui/icons/Category';
-import InfoIcon from '@material-ui/icons/Info';
+import ListIcon from '@material-ui/icons/List';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 interface ListItemLinkProps extends LinkProps {
@@ -30,8 +30,12 @@ function Sidebar() {
   return (
     <>
       <List>
-        <ListItemLink to="/about" icon={<InfoIcon />} primary="About" />
-        <ListItemLink to="/home" icon={<CategoryIcon />} primary="Home" />
+        <ListItemLink to="/category" icon={<ListIcon />} primary="Category" />
+        <ListItemLink
+          to="/home"
+          icon={<CategoryIcon />}
+          primary="Organization"
+        />
         <ListItemLink to="/users" icon={<PersonAddIcon />} primary="Users" />
       </List>
       <Divider />

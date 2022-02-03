@@ -5,7 +5,7 @@ import ItemSelectorColumn from '../../components/ItemSelectorColumn';
 import { Item } from '../../components/ItemSelectorColumn/types';
 import LoadingContainer from '../../components/LoadingContainer';
 import { api } from '../../services/api';
-import { Meme, Pagination, Post } from '../../services/types';
+import { Post } from '../../services/types';
 import { BottomContainer, Container, WrapCollectionController } from './styles';
 
 function Home() {
@@ -21,9 +21,9 @@ function Home() {
     try {
       setLoading(true);
       const response = await api.get<Post>(`post/${id}`);
-      if (response.data.memes) {
+      if (response.data.Meme) {
         setMemes(
-          response.data.memes?.map<Item>((item) => ({
+          response.data.Meme?.map<Item>((item) => ({
             id: item.id,
             url: item.link,
           }))
